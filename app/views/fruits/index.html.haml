@@ -1,0 +1,33 @@
+.container 
+  .row
+    %h1 Listing fruit
+    - if flash[:notice]
+      %p= flash[:notice]
+
+
+  .row
+    %table.table.table-bordered.table-sortable
+      %thead
+        %tr
+          %th Name
+          %th
+          %th
+          %th
+      %tbody.fruit_item
+        - @fruits.each do |fruit|
+          -# %tr.item(data: { model_name: fruit.class.name.underscore, update_url: fruit_sort_path(fruit) })
+          %tr.item
+            %td
+              = fruit.name
+            %td
+              = link_to 'Show', fruit
+            %td
+              = link_to 'Edit', edit_fruit_path(fruit)
+            %td
+              = link_to 'Destroy', fruit, data: {confirm: 'Are you sure?'}, method: :delete
+
+    -# = link_to 'New Fruit', new_fruit_path, class:"btn btn-primary"
+    
+  .row
+    %h1 New fruit
+    = render 'form'
