@@ -1,14 +1,3 @@
--# = form_with(model: fruit, local: true) do |form|
--#   - if fruit.errors.any?
--#     #error_explanation
--#       %h2
--#         = pluralize(fruit.errors.count, "error")
--#         prohibited this fruit from being saved:
--#       %ul
--#         - fruit.errors.full_messages.each do |message|
--#           %li= message
--#   .field
--#     = form.label :name
 = form_for @fruit, class: 'a' do |f|
   .field
     = f.label :name

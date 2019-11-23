@@ -66,3 +66,6 @@ gem 'haml-rails'
 gem 'bootstrap-sass'
 
 gem 'jquery-rails'
+
+# デバックを使いたかったので追加、これはしなくても良い
+gem 'pry-byebug'

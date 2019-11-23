@@ -6,6 +6,11 @@ class FruitsController < ApplicationController
   def index
     @fruits = Fruit.all
     @fruit = Fruit.new
+
+    respond_to do |format| #記述追加
+      format.html
+      format.json { @new_fruit = Fruit.where('id > ?', params[:id]) }
+    end
   end
 
   # GET /fruits/1
