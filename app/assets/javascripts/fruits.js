@@ -48,9 +48,9 @@ $(function(){
     //こっちの方が記述量が少なくて良い
   })
 
-  
+
   //自動更新
-  if (location.pathname.match()){ //もし現在のURLパスがhttp://localhost:3000/だったら
+  if (location.pathname.match()){ //もし現在のURLパスがindexアクションだったら（http://localhost:3000/fruitsもしくはhttp://localhost:3000）
     setInterval(update, 5000);//5000ミリ秒ごとにupdateという関数を実行する
   }
   
