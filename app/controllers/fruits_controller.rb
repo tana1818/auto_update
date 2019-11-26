@@ -9,7 +9,7 @@ class FruitsController < ApplicationController
 
     respond_to do |format| #記述追加
       format.html
-      format.json { @new_fruit = Fruit.where('id > ?', params[:id]) }
+      format.json { @new_fruit = Fruit.where('id > ?', params[:id]) } #jsのdataの情報がparams[:id]に入る
     end
   end
 

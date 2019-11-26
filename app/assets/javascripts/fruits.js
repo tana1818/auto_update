@@ -43,7 +43,7 @@ $(function(){
     //   $(".c").removeAttr("disabled")
     // })
     return false;
-    //要素の効果を無効化する、ちょっとわかんないけどとりま親要素のクリックをなかった」ことにするっぽいw
+    //要素の効果を無効化する、ちょっとわかんないけどとりま親要素のクリックをなかったことにするっぽいw
     //上記のコメント化記述は'disabled'を消しにいってる
     //こっちの方が記述量が少なくて良い
   })
@@ -57,26 +57,26 @@ $(function(){
   function update(){
     if($('.item')[0]){ //もし'.item'というクラスがあったら
       var fruit_id = $('.item:last').data('id'); //一番最後にある'.item'クラスの'id'というデータ属性を取得し、'fruit_id'という変数に代入
+      $.ajax({
+        url: location.href, //urlは現在のページを指定
+        type: 'GET', //アクション名指定（データを表示させる）
+        data: { id: fruit_id }, //rails に引き渡すデータ(これがparams[:id]になる)
+        dataType: 'json'
+      })
+      .done(function(data){
+        if (data.length){ //もしdataに値があったら
+          $.each(data, function(i, data){ //'data'を'data'に代入してeachで回す
+            var html = buildHTML(data);
+            $('.fruit_item').append(html);
+          })
+        }
+      })
+      .fail(function(){ //そんなにこの記述はいらない気がするけど、異常系のエラー（途中で通信が中断されたり）が起きた時用
+        alert('自動更新に失敗しました')
+      });
     }
-    else { //ない場合は
-      var fruit_id = 0 //0を代入（これは何も投稿されてなかった場合NULLではなく０を入れてあげる処理）
+    else {
+      clearInterval(); //値がなかったらsetIntervalを止める（この記述はなくても動く、別画面に遷移した際は、ブラウザを閉じた時同様、遷移した時点で遷移前のJavaScript実行は勝手に打ち切られる模様）
     }
-    $.ajax({
-      url: location.href, //urlは現在のページを指定
-      type: 'GET', //アクション名指定（データを表示させる）
-      data: { id: fruit_id }, //rails に引き渡すデータ
-      dataType: 'json'
-    })
-    .done(function(data){
-      if (data.length){ //もしdataに値があったら
-        $.each(data, function(i, data){ //'data'を'data'に代入してeachで回す
-          var html = buildHTML(data);
-          $('.fruit_item').append(html);
-        })
-      }
-    })
-    .fail(function(){ //そんなにこの記述はいらない気がするけど、異常系のエラー（途中で通信が中断されたり）が起きた時用
-      alert('自動更新に失敗しました')
-    });
   }
 });
